@@ -5,3 +5,12 @@
 - 📫 How to reach me, write me to discord: MegaManCito#9746 or send me a email for megamanprog@gmail.com
 - 😄 Pronouns: Him, I don't believe in those "altern pronouns"
 - ⚡ Fun fact: I am a fun fact
+
+- //Español
+- Hola, soy Emmanuel, y si hablo español ksjsks.
+- Traducción de todo: Me interesa mucho los videojuegos, en general nintendo como Metroid, etc.
+- Estoy interesado en usar python, c# y c++
+- Quiero ayudar a los que recién empiezan con ejemplos sencillos
+- Arriba están algunos contactos si tienen preguntas o cosas que decir (cuidado si me van a tirar hate >:( )
+- No creo que los géneros aparte de hombre y mujer sean necesarios su existencia; al único que diría que resume todos es el no binario o no especifico y ya
+- Dato curioso, no se nada del mundo 
