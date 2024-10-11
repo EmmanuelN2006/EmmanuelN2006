@@ -1,0 +1,7 @@
+- 👋 Hi, I’m @EmmanuelN2006
+- 👀 I’m interested in Videogames like Metroid, MegaMan and Splatoon~ 
+- 🌱 I’m currently learning Python, C# and C++
+- 💞️ I’m looking to collaborate on first steps to Python
+- 📫 How to reach me, write me to discord: MegaManCito#9746 or send me a email for megamanprog@gmail.com
+- 😄 Pronouns: Him, I don't believe in those "altern pronouns"
+- ⚡ Fun fact: I am a fun fact
