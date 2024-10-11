@@ -1,0 +1,1 @@
+Los códigos almacenados son programas que interactuán con series de números que ingresas o que deben llegar a cierto número
