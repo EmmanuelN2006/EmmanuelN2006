@@ -1,0 +1,1 @@
+En este apartado verás archivos que leen ciertos elementos y usarlos para ciertas cosas
