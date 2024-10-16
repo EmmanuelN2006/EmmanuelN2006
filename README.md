@@ -1,16 +1,7 @@
-- 👋 Hi, I’m @EmmanuelN2006
-- 👀 I’m interested in Videogames like Metroid, MegaMan and Splatoon~ 
-- 🌱 I’m currently learning Python, C# and C++
-- 💞️ I’m looking to collaborate on first steps to Python
-- 📫 How to reach me, write me to discord: MegaManCito#9746 or send me a email for megamanprog@gmail.com
-- 😄 Pronouns: Him, I don't believe in those "altern pronouns"
-- ⚡ Fun fact: I am a fun fact
-
-- //Español
-- Hola, soy Emmanuel, y si hablo español ksjsks.
-- Traducción de todo: Me interesa mucho los videojuegos, en general nintendo como Metroid, etc.
-- Estoy interesado en usar python, c# y c++
-- Quiero ayudar a los que recién empiezan con ejemplos sencillos
-- Arriba están algunos contactos si tienen preguntas o cosas que decir (cuidado si me van a tirar hate >:( )
-- No creo que los géneros aparte de hombre y mujer sean necesarios su existencia; al único que diría que resume todos es el no binario o no especifico y ya
-- Dato curioso, no se nada del mundo 
+- 👋 Hi, Soy Emmanuel
+- 👀 Me interesa mucho los videojuegos, en general nintendo como Metroid, MegaMan, Splatoon, etc~ 
+- 🌱 Estoy interesado en usar python, c# y c++
+- 💞️ Quiero ayudar a los que recién empiezan con ejemplos sencillos y pasos gigantes
+- 📫 Si necesitan algo, escribenme por discord: MegaManCito#9746 o mandeme un email por megamanprog@gmail.com
+- 😄 Subo cada 2 semanas algunos archivos, mayormente de python
+- ⚡ Dato curioso: Un tarea sencilla la complico a 700 lineas jKSKJSK
