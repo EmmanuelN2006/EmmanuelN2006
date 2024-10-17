@@ -1,0 +1,33 @@
+Hola, como sabes en todo lenguaje hay ciertas palabras básicas como Hola-Hello-Salut-Olá y Gracias-Thank you-Merci-Obrigado
+Por lo que voy a ponerte comandos super básicos, que son con los primeros que debes empezar desde cero
+
+#Comandos de imprimir
+• Print() - Sirve para imprimir texto, variables y/o elementos que estén dentro del código, con este puedes hacer el clásico 
+ejemplo de Hola mundo-Hello World;
+• Print("Hello World") - En el caso de Python, toca poner la oración con " " - comillas o con ' ' - comillas simples para indicar texto
+• Print(Variable_nombre) - Sirve para poner el valor de cierta variable que hallas nombrado
+• Print(f"La respuesta es {Variable_nombre}") - Sirve para poner una oración y a su vez un valor numérico en una sola frase, 
+la f expresa esa combinación, por lo que es importante colocar f al principio si quieres hacer eso
+• Print("La respuesta es "+str(Variable_nombre)) - Hace lo mismo que el comando de arriba, pero es más largo y usas str(Variable_nombre)
+para que imprima ese valor por fuera de la oración y se una.
+
+#Tipos de variable. Hay que conocer que no todo tipo de dato se puede juntar por arte de magia, hay que seguir una secuencia para que
+varios tipos de variables se junten e interactuen.
+
+//Int. Son variables que representan valores enteros.
+• a = int - Indicas que cierta variable será un entero, por lo que, podrás ingresar valores enteros en esa variable
+• Int(Variable_nombre) - Indica el valor de la variable en un número entero, siempre y cuando pueda y se le permita.
+//Float. Son variables que representan números racionales e irracionales, generalmente usados en divisiones o valores que tienen muchas 
+cifras
+• a = float - Indicas que cierta variable es un racional, por lo que, podrás ingresas valores numéricos de todo tipo 
+• Float(Variable_nombre) - Indica que el valor de la variable será un racional, siempre y cuando cumpla requisitos para ser número
+//Bolean. Son variables que representan condiciones de verdadero o falso, lo que significa que solo tienen 2 estados, true o false
+• a = bool - Indicas que cierta variable es un booleano, lo que es tener dos valores, falso o verdadero
+• bool(Variable_nombre) - Indica que esa variable es un booleano, aunque puede ser que tu variable tenga un valor numérico, por lo
+que debes estar pendiente a ese cambio
+//String. Son las variables que indican texto o caracteres, que no son números o no indican un estado, solo son elementos gráficos
+para el código, se representan con "" o ''.
+• a = string - Indica que la variable contendrá todo elemento dentro de sí como caracteres, por lo que números, letras y oraciones 
+serán representanciones de lo que en verdad eran.
+• string(Variable_nombre) - Expresa que todo el contenido de la variable ahora será caracter, por lo que, su interacción será exclusiva
+si es que no es tratado bien sus elementos.
