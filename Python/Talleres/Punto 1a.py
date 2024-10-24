@@ -1,3 +1,5 @@
+import numpy as np #Lista 
+
 def busqueda_binaria(lista, valor_a_buscar):
     inicio = 0
     fin = len(lista) - 1
@@ -19,9 +21,10 @@ def busqueda_binaria(lista, valor_a_buscar):
     return -1
 
 # Ejemplo de uso:
-mi_lista = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
-valor = 7
-
+n = int(input("Ingrese la cantidad que quieras en la lista="))
+mi_lista = np.random.randint(0, 101, n) #(a, b, tamaño)
+mi_lista.sort(); print(mi_lista)
+valor = int(input("Ingrese el número que quieres buscar="))
 resultado = busqueda_binaria(mi_lista, valor)
 
 if resultado != -1:
