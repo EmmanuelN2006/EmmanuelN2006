@@ -1,0 +1,8 @@
+//Explícita
+double pi = 3.1416;
+int enteroPi = (int)pi;  // Pérdida de la parte decimal
+Console.WriteLine(enteroPi);
+
+//Implícita
+int num = 10;
+double resultado = num;  // Conversión automática a double
