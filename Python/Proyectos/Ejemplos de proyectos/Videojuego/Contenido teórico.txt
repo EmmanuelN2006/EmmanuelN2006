@@ -1,0 +1,101 @@
+Acá se dejará comandos útiles que se usarán en proyectos de Python relacionados con videojuegos, después de buscar en varias páginas y consultar
+propiamente con IA especializadas con Python, una recomendación es que si usas ChatGPT para hacer código, intentes tú hacer el código y que sea
+la IA un recomendador, osea, que te diga que cosas puedas cambiar para mejorar tu algoritmo y que sea más eficiente.
+
+Empecemos:
+1. Instalar la librería
+Para poder empezar a programar un juego en Python, hay que instalar la librería, por lo que, deberan de ir a la terminal y poner
+Terminal== 
+pip install pygame
+
+Luego de la instalación podrás poner en el código la librería
+python==
+
+  import pygame as py//Si pones as (Nombre sugerido por la persona) abreviaras la funcion pygame de la libreria al nombre que pusiste
+  //En este caso la libreria ahora la puedo colocar como py.
+
+2. Configurar el Entorno Básico
+Configura una ventana de juego, define su tamaño y establece el título. Un código básico para iniciar Pygame sería:
+python==
+
+  import pygame
+  pygame.init()
+  
+  screen = pygame.display.set_mode((800, 600))
+  pygame.display.set_caption("Mi Juego")
+
+3. Crear un Bucle Principal
+El bucle principal mantiene el juego en ejecución hasta que el jugador decida salir.
+Dentro del bucle, procesa eventos, actualiza la pantalla y renderiza los gráficos.
+python==
+
+  running = True
+  while running:
+      for event in pygame.event.get():
+          if event.type == pygame.QUIT:
+              running = False
+  
+      # Limpiar pantalla, actualizar elementos del juego, y dibujar en pantalla
+      pygame.display.flip()
+  pygame.quit()
+
+4. Diseñar la Lógica de Juego
+Define la lógica básica, como el movimiento del jugador, colisiones, recolección de objetos, y puntuación.
+Empieza con el movimiento básico del jugador, por ejemplo:
+python==
+
+  player_pos = [100, 100]
+  player_speed = 5
+  
+  # Dentro del bucle principal:
+  keys = pygame.key.get_pressed()
+  if keys[pygame.K_LEFT]:
+      player_pos[0] -= player_speed
+  if keys[pygame.K_RIGHT]:
+      player_pos[0] += player_speed
+
+5. Añadir Imágenes y Sonidos
+Carga imágenes (sprites) para personajes, enemigos o fondos.
+python==
+
+player_img = pygame.image.load('player.png')
+
+Usa sonido para hacer el juego más atractivo:
+python==
+
+  pygame.mixer.music.load('background.mp3')
+  pygame.mixer.music.play(-1)  # -1 para repetir indefinidamente
+
+7. Colisiones y Física del Juego
+Usa rectángulos para detectar colisiones entre objetos.
+python==
+
+  player_rect = player_img.get_rect(topleft=(player_pos[0], player_pos[1]))
+  enemy_rect = enemy_img.get_rect(topleft=(enemy_pos[0], enemy_pos[1]))
+  
+  if player_rect.colliderect(enemy_rect):
+      print("Colisión!")
+
+8. Puntaje y Feedback Visual
+Agrega un sistema de puntaje y muestra el puntaje en la pantalla.
+Pygame tiene soporte para texto utilizando pygame.font.
+python==
+  font = pygame.font.Font(None, 36)
+  score_text = font.render(f'Score: {score}', True, (255, 255, 255))
+  screen.blit(score_text, (10, 10))
+
+9. Polish (Optimización y Mejora)
+Mejora la eficiencia del juego limitando los cuadros por segundo:
+python ==
+  clock = pygame.time.Clock()
+  clock.tick(30)  # Establece un máximo de 30 FPS
+
+====================== RECOMENDACIONES =========================================
+1. Tienen que saber que si van a usar archivos en un programa de python, reunan todos los archivos dentro de un carpeta con el código y 
+siempre busquen ordenarlos, así evitan el desorden y errores por carpetas mal ubicadas o direcciones erroneas.
+
+2. Si es su primera vez no se compliquen, busquen hacer un juego simple, que solo incluya al principio movimiento, o buscar ciertos 
+objetos para un puntaje.
+
+3. Poner buenos nombres a las variables y funciones, para que si ocurre un error vean cuál código posiblemente escribieron mal, sobretodo
+organizar el código con los diagramas de flujo o mapas conceptuales sobre las ordenes que planean.
