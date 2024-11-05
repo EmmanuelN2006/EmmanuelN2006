@@ -1,0 +1,1 @@
+Carpeta donde tendrá algunos programas que compilan funciones importantes, por ahora los básicos y que sean importantes
