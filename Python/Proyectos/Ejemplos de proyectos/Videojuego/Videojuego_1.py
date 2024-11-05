@@ -1,94 +1,98 @@
-#Videojuego space invaders en python con mecánicas de aleatoriedad y uso de las matrices
+"""Ejemplo de videojuegos"""
 
-#Objetivos del proyecto
-#1. Establecer la idea principal - Hecho: Videojuego
-#2. Dar un enfoque especial al proyecto para que no parezca una simple copia - 
-#3. Conocer las librerías que se planean utilizar para el desarrollo del mismo -
-#4. Empezar con la estructura básica... -
-    #La estructura básica para hacer el juego es:
-    #El boceto inicial del juego y sus sprites -
-    #Los sprites del juego -
-    #Los scripts del juego -
-    #La interfaz del juego -
-    #La jugabilidad del juego -
-    #La música del juego -
-#5. Planeación de la exposición del juego -
+import pygame
+import sys
 
-#Librerías
-import numpy as np
-import math as mt
-import pygame as py
+# Inicializar Pygame
+pygame.init()
 
-#Definir la pantalla del juego principal - Pero hay que hacer un bucle para que se inicie y se termine
-# def Pantalla(Jugando):  
-#     while Jugando == True:
-#         py.init() #Inicia la configuración del juego - Es como el comando ventana.mainloop() pero que se pone al principio
-#         Ventana_principal = py.display.set_mode((720, 480)) #Establece el tamaño de la pantalla
-#         Ventana_principal.fill(BLANCO)
-#         py.display.set_caption("Videojuego") #Establece el nombre de la ventana
-#         #####Cierre de la ventana####
-#         for event in py.event.get(): #Comando fundamental para que funcione el botón cerrar
-#             if event.type == py.QUIT: #Establece que si el comando evento sea salir, procede a decir que jugar es falso
-#                 Jugando = False #Jugar se vuelve falso y se acaba el bucle 
+# Configuración de la pantalla
+screen_width = 800
+screen_height = 600
+screen = pygame.display.set_mode((screen_width, screen_height))
+pygame.display.set_caption("Ping Pong")
 
-#Itera hasta que el usuario pincha sobre el botón de cierre.
-Instrucciones = bool; Instrucciones = True
-Jugar = bool; Jugar = True
-Jugando = bool; Jugando = True
-Finalizar = bool; Finalizar = False #Saber si el usuario está jugando, va a jugar, quiere ver instrucciones..
-BLANCO = (0xFF, 0xFF, 0xFF)
-print("Variables cargadas") ##Validación 1##
+# Colores
+white = (255, 255, 255)
+black = (0, 0, 0)
 
-###Boceto preferible###
-print("Juego iniciado")
-py.init() #Inicia la configuración del juego - Es como el comando ventana.mainloop() pero que se pone al principio
-#Configuración de la pantalla#
-Ventana_principal = py.display.set_mode((720, 480)) #Establece el tamaño de la pantalla
-py.display.set_caption("Videojuego") #Establece el nombre de la ventana
-print("Configuración de ventana cargada") ##Validación 2##
-#Configuración del cierre de la pantalla#
+# Paletas
+paddle_width = 10
+paddle_height = 100
+player_pos = [screen_width - 20, screen_height // 2 - paddle_height // 2]
+opponent_pos = [10, screen_height // 2 - paddle_height // 2]
+paddle_speed = 7
 
-#Configuración del jugador#
-Sprite_jugador = py.image.load('Proyecto de estructuras - Videojuego\Personaje_ejemplo.png') #La dirección del archivo se pone usando la ruta de acceso relativa
-print("Imagen cargada") #Validación 3#
-Posicion_jugador = [320, 240]
-Velocidad_jugador = [3, 3] #Límites de velocidad
-Desplazamiento_jugador = Sprite_jugador.get_rect() #Hace que exista una linea imaginaria para el movimiento
+# Pelota
+ball_size = 15
+ball_pos = [screen_width // 2, screen_height // 2]
+ball_speed = [5, 5]
 
-# Se usa para gestionar cuan rápido se actualiza la pantalla
-reloj = py.time.Clock()
-print("Fps cargados") ##Validación 4##
+# Puntuación
+player_score = 0
+opponent_score = 0
+font = pygame.font.Font(None, 36)
 
-########## -------- Bucle Principal del Programa - Partes esenciales -----------#########
-while not Finalizar:
-##### Eventos que incluyan acciones de condiciones y/o correciones, debajo de acá ######
-    for evento in py.event.get(): # El usuario hizo algo
-        if evento.type == py.QUIT: # Si el usuario pincha sobre cerrar
-            Finalizar = True # Esto que indica que hemos acabado y sale de este bucle
-            print("Cierre cargado") ##Validación 5##
-    ##### Eventos que incluyan acciones de condiciones y/o correciones, arriba de acá ######
-    
-    #### Todas las mecánicas del juego deben ir debajo del comentario ####
-    Desplazamiento_jugador = Desplazamiento_jugador.move(Velocidad_jugador)
-    if Desplazamiento_jugador.left < 0 or Desplazamiento_jugador.right > 640: #Ancho
-        Velocidad_jugador[0] = -Velocidad_jugador[0] #Movimiento de izquierda a derecha
-    if Desplazamiento_jugador.top < 0 or Desplazamiento_jugador.bottom > 480: #Altura
-        Velocidad_jugador[1] = -Velocidad_jugador[1] #Movimiento de arriba a abajo
-    #### Todas las mecánicas del juego deben ir encima del comentario ####
-    
-    
-    ### Todo el código de sprites, dibujos y música deben ir debajo del comentario ###
-    #Configuración de la ventana
-    Ventana_principal.fill(BLANCO) #Color de fondo
-    Ventana_principal.blit(Sprite_jugador, Desplazamiento_jugador) #Imagen de los objetos
-    py.display.flip()
-    print("Ventana actualizada") #Validación 6#
+# Bucle principal del juego
+running = True
+while running:
+    # Manejar eventos
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
 
-    ### Todo el código de sprites, dibujos y música deben ir encima del comentario ###
-    
-    ### Limita a 60 fotogramas por segundo (Imágenes cargadas y pasadas por segundo) ###
-    reloj.tick(60)
-    print("60 Fps corriendo") ##Validación 7##
-########################################################################################
-py.quit() #Si no hay otra acción a realizar - Cerrar el juego
-print("Se cerró el juego") 
+    # Movimiento del jugador
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_UP] and player_pos[1] > 0:
+        player_pos[1] -= paddle_speed
+    if keys[pygame.K_DOWN] and player_pos[1] < screen_height - paddle_height:
+        player_pos[1] += paddle_speed
+
+    # Movimiento del oponente
+    if opponent_pos[1] < ball_pos[1]:
+        opponent_pos[1] += paddle_speed - 3
+    if opponent_pos[1] > ball_pos[1]:
+        opponent_pos[1] -= paddle_speed - 3
+
+    # Movimiento de la pelota
+    ball_pos[0] += ball_speed[0]
+    ball_pos[1] += ball_speed[1]
+
+    # Colisiones de la pelota
+    if ball_pos[1] <= 0 or ball_pos[1] >= screen_height - ball_size:
+        ball_speed[1] = -ball_speed[1]
+
+    if (ball_pos[0] >= player_pos[0] - ball_size and 
+        player_pos[1] < ball_pos[1] < player_pos[1] + paddle_height):
+        ball_speed[0] = -ball_speed[0]
+
+    if (ball_pos[0] <= opponent_pos[0] + paddle_width and 
+        opponent_pos[1] < ball_pos[1] < opponent_pos[1] + paddle_height):
+        ball_speed[0] = -ball_speed[0]
+
+    # Puntaje y reinicio de pelota
+    if ball_pos[0] < 0:
+        player_score += 1
+        ball_pos = [screen_width // 2, screen_height // 2]
+        ball_speed[0] = -ball_speed[0]
+    elif ball_pos[0] > screen_width:
+        opponent_score += 1
+        ball_pos = [screen_width // 2, screen_height // 2]
+        ball_speed[0] = -ball_speed[0]
+
+    # Dibujar en pantalla
+    screen.fill(black)
+    pygame.draw.rect(screen, white, (*player_pos, paddle_width, paddle_height))
+    pygame.draw.rect(screen, white, (*opponent_pos, paddle_width, paddle_height))
+    pygame.draw.ellipse(screen, white, (*ball_pos, ball_size, ball_size))
+    pygame.draw.aaline(screen, white, (screen_width // 2, 0), (screen_width // 2, screen_height))
+
+    # Mostrar puntaje
+    player_text = font.render(f"{player_score}", True, white)
+    opponent_text = font.render(f"{opponent_score}", True, white)
+    screen.blit(player_text, (screen_width // 2 + 20, 20))
+    screen.blit(opponent_text, (screen_width // 2 - 40, 20))
+
+    pygame.display.flip()
+    pygame.time.Clock().tick(60)
