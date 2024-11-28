@@ -16,29 +16,29 @@ Ventana_principal = pygame.display.set_mode(Dimensiones); pygame.display.set_cap
 #Configura el tamaño de la ventana y el nombre de la ventana
 
 #Configuración del texto como puntuación, vidas, etc...
-Vidas = 3
-Puntuacion = 0
+Vidas = 3 #Vidas totales que debe haber
+Puntuacion = 0 #Puntuación que se va a ganar durante el combate contra los enemigos
 Vidas_png = {
     1:pygame.image.load('Enemigos/Vidas.png'),
     2:pygame.image.load('Enemigos/Vidas.png'),
     3:pygame.image.load('Enemigos/Vidas.png')}
 Vida1 = Vidas_png[1]; Vida2 = Vidas_png[2]; Vida3 = Vidas_png[3]
-Pos1 = [710, 470]; Pos2 = [700, 470]; Pos3 = [690, 470]
+Pos1 = [680, 30]; Pos2 = [680, 20]; Pos3 = [680, 10]
 
-def mostrar_puntuacion():
+def mostrar_puntuacion(): #Muestra y desarrollla la puntuación que saldrá
     """Muestra la puntuación en pantalla."""
-    fuente = pygame.font.Font(None, 24)
-    texto = fuente.render(f"Puntuación: {Puntuacion}", True, (255, 255, 255))
-    Ventana_principal.blit(texto, (10, 10))
+    fuente = pygame.font.Font(None, 24) #Establece un texto con una fuente predeterminada en tamaño 24 de letra
+    texto = fuente.render(f"Puntuación: {Puntuacion}", True, (255, 255, 255)) #Renderiza el texto que se escribirá con la fuente y su posición y si se debe mostrar
+    Ventana_principal.blit(texto, (10, 10)) #Lo carga dentro de la imagen
 
-def mostrar_vidas():   
+def mostrar_vidas(Vidas): #Define cuales son las vidas que le falta al jugador antes de perder
     if Vidas == 3:
         Ventana_principal.blit(Vida3, Pos3)
     if Vidas == 2:
         Ventana_principal.blit(Vida2, Pos2)
     if Vidas == 1:
         Ventana_principal.blit(Vida1, Pos1)
-    if Vidas == 0:
+    if Vidas <= 0:
         Finalizar = True
 
 #Configuración del jugador
@@ -59,18 +59,18 @@ Frames_disparo = {
     2:pygame.image.load('Disparo/Disparo2.png'), #Frame 2 del disparo
     3:pygame.image.load('Disparo/Disparo3.png')} #Frame final del disparo
 Disparo = Frames_disparo[1]; #Imagen inicial con posición fuera de la ventana visible
-Disparos_activos = []
+Disparos_activos = [] #Muestra cuáles son los disparos que se encuentran en el juego
 
 #Configuración de los enemigos
 Enemigos_posibles = {
     1:pygame.image.load('Enemigos/Enemigo1.png'), #Sprite 1 de un posible enemigo
     2:pygame.image.load('Enemigos/Enemigo2.png')} #Sprite 2 de un posible enemigo
-Enemigos = []
-Enemigos2 = []
-Enemigos_muertos = []
+Enemigos = [] #Muestra los enemigos actuales en el juego
+Enemigos2 = [] #Muestra los enemigos tipo 2 actuales en el juego
+Enemigos_muertos = [] #Clasifica los enemigos muertos
 
 #Configuración de las muertes
-Muerte = pygame.image.load('Enemigos/Muerte.png')
+Muerte = pygame.image.load('Enemigos/Muerte.png') #Imagen de muerte
 
 #Condicionales para el juego
 Choque = False #Cuando el jugador este en las limitaciones de la ventana
@@ -105,7 +105,7 @@ def mover_jugador(Tecla_presionada, pos):
 
 def generar_enemigos():
     """Genera enemigos en posiciones aleatorias en la parte superior."""
-    if len(Enemigos) < 8:  # Máximo 8 enemigos en pantalla
+    if len(Enemigos) < 6:  # Máximo 6 enemigos en pantalla
         x = random.randint(0, Dimensiones[0] - 50) #Elige un x aleatorio
         Enemigos.append([x, -50])  # Añade el enemigo fuera de la pantalla
 
@@ -117,7 +117,7 @@ def mover_enemigos():
             Enemigos.remove(enemigo)
 
 def generar_enemigos2():
-    if len(Enemigos2) < 5:  # Máximo 5 enemigos en pantalla
+    if len(Enemigos2) < 3:  # Máximo 3 enemigos en pantalla
         y = random.randint(0, Dimensiones[1] - 50)
         Enemigos2.append([-50, y])  # Añade el enemigo fuera de la pantalla
 
@@ -142,11 +142,10 @@ def actualizar_disparos():
         if disparo[1] < 0:
             Disparos_activos.remove(disparo)
         else:
-            # Detectar colisión con enemigos
+            # Detectar colisión con enemigos con las balas
             for enemigo in Enemigos[:]:
                 if enemigo[0] < disparo[0] < enemigo[0] + 50 and enemigo[1] < disparo[1] < enemigo[1] + 50:
                     Ventana_principal.blit(Muerte, enemigo)
-                    time.sleep(0.05)
                     Enemigos.remove(enemigo)
                     Disparos_activos.remove(disparo)
                     Puntuacion += 5
@@ -154,7 +153,6 @@ def actualizar_disparos():
             for enemigo2 in Enemigos2[:]:
                 if enemigo2[0] < disparo[0] < enemigo2[0] + 50 and enemigo2[1] < disparo[1] < enemigo2[1] + 50:
                     Ventana_principal.blit(Muerte, enemigo2)
-                    time.sleep(0.5)
                     Enemigos2.remove(enemigo2)
                     Disparos_activos.remove(disparo)
                     Puntuacion += 10
@@ -168,27 +166,38 @@ def animar_muertes():
         if enemigo[2] <= 0:  # Elimina animación si el tiempo termina
             Enemigos_muertos.remove(enemigo)
 
-#def choques_muerte():
-    #Usar los comandos de disparos
+def choques_muerte(Vidas):
+    for enemigo in Enemigos[:]:
+        if enemigo[0] == Posicion_jugador[0] and enemigo[1] == Posicion_jugador[1]:
+            Vidas -= 1
+            return Vidas
+    for enemigo2 in Enemigos2[:]:
+        if enemigo2[0] == Posicion_jugador[0] and enemigo2[1] == Posicion_jugador[1]:
+            Vidas -= 1
+            return Vidas
 #Configuración de la velocidad y frames
 reloj = pygame.time.Clock() #Importante en la actualización de imágenes
 print("Configuración cargada") #Medidas a tomar
 
 #Preparando la pantalla
 Ventana_principal.fill(Colorfondo)
-pygame.display.flip()
-pygame.mixer.music.load('Música/Batallando.mp3')
+pygame.display.flip() #Actualiza la pantalla del juego
+pygame.mixer.music.load('Música/Batallando.mp3') #Carga la música almacenada en las carpetas
 pygame.mixer.music.play(-1) #Hace que el juego reproduzca el juego de forma ilimitada
 
 ##Bucle##
 while not Finalizar:
+    Fondo = pygame.image.load('Fondo.jpg')
+    Fondo = pygame.transform.scale(Fondo, (800,800))
     for evento in pygame.event.get(): #Cuando el jugador cierra la ventana
         if evento.type == pygame.QUIT: #Cierra el juego cuando se usa el cerrar ventana
             Finalizar = True
             print("Se cerró el juego") 
         if evento.type == pygame.KEYDOWN: #Si alguna tecla es presionada
             if evento.key == pygame.K_SPACE:  #Si la tecla es espacio, dispara
-                Disparos_activos.append([Posicion_jugador[0] + 20, Posicion_jugador[1]])
+                pygame.mixer.music.load('Música/Disparo_sonido.mp3') #Carga el sonido para disparar
+                pygame.mixer.music.play() #Reproduce el sonido almacenado
+                Disparos_activos.append([Posicion_jugador[0] + 20, Posicion_jugador[1]]) #Agrega un disparo con sus coordenadas respecto al jugador
 
     ### Cierre alternativo ###
     Tecla_presionada = pygame.key.get_pressed() #Variable del tipo bool
@@ -213,20 +222,22 @@ while not Finalizar:
     
     #Configuración de la ventana y los dibujos
     Ventana_principal.fill(Colorfondo) #Color de fondo de pantalla
+    Ventana_principal.blit(Fondo, (0,0))
     Ventana_principal.blit(Imagen_jugador, Posicion_jugador) #Imagen del objeto y su posicion para siempre - elemento en capa mayor
 
-    for disparo in Disparos_activos:
+    for disparo in Disparos_activos: #Actualiza cada disparo
         Ventana_principal.blit(Frames_disparo[3], disparo)
 
-    for enemigo in Enemigos:
+    for enemigo in Enemigos: #Actualiza cada enemigo tipo 1
         Ventana_principal.blit(Enemigos_posibles[1], enemigo)
     
-    for enemigo2 in Enemigos2:
+    for enemigo2 in Enemigos2: #Actualiza cada enemigo tipo 2
         Ventana_principal.blit(Enemigos_posibles[2], enemigo2) 
 
     animar_muertes()
+    choques_muerte(Vidas)
     mostrar_puntuacion()
-    mostrar_vidas()
+    mostrar_vidas(Vidas)
     pygame.display.flip()
     # print("Ventana actualizada") #Validación 6#
     ### Todo el código de sprites, dibujos y música deben ir encima del comentario ###
