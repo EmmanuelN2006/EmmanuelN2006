@@ -9,6 +9,7 @@ print("Cargando juego") #Indica que el juego se pondrá a cargar si no hay error
 
 pygame.init() #Inicia la configuración del videojuego
 
+### Variables ###
 #Configuración de la pantalla
 Colorfondo = (35,50,25) #Por ahora el fondo que incluirá la pantalla
 Dimensiones = [720,480] #Ancho / Alto
@@ -77,6 +78,7 @@ Choque = False #Cuando el jugador este en las limitaciones de la ventana
 Daño = False #Cuando el jugador toque al enemigo o elementos del enemigo
 Finalizar = False #Condición para cerrarlo
 
+### Funciones ###
 #Funciones para el funcionamiento del juego
 def mover_jugador(Tecla_presionada, pos):
     Imagen = Frames_jugador[1]
