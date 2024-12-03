@@ -1,4 +1,4 @@
-#Código del videojuego: 
+#Código del videojuego: https://github.com/EmmanuelN2006/EmmanuelN2006/blob/main/Python/Proyectos/Ejemplos%20de%20proyectos/Videojuego/Space%20Invarders/Videojuego%20space%20invaders%20-%20c%C3%B3digo.py
 #Deben usar la carpeta del proyecto como área de trabajo
 
 import pygame #pip install pygame
@@ -9,7 +9,6 @@ print("Cargando juego") #Indica que el juego se pondrá a cargar si no hay error
 
 pygame.init() #Inicia la configuración del videojuego
 
-### Variables ###
 #Configuración de la pantalla
 Colorfondo = (35,50,25) #Por ahora el fondo que incluirá la pantalla
 Dimensiones = [720,480] #Ancho / Alto
@@ -78,7 +77,6 @@ Choque = False #Cuando el jugador este en las limitaciones de la ventana
 Daño = False #Cuando el jugador toque al enemigo o elementos del enemigo
 Finalizar = False #Condición para cerrarlo
 
-### Funciones ###
 #Funciones para el funcionamiento del juego
 def mover_jugador(Tecla_presionada, pos):
     Imagen = Frames_jugador[1]
@@ -168,15 +166,7 @@ def animar_muertes():
         if enemigo[2] <= 0:  # Elimina animación si el tiempo termina
             Enemigos_muertos.remove(enemigo)
 
-def choques_muerte(Vidas):
-    for enemigo in Enemigos[:]:
-        if enemigo[0] == Posicion_jugador[0] and enemigo[1] == Posicion_jugador[1]:
-            Vidas -= 1
-            return Vidas
-    for enemigo2 in Enemigos2[:]:
-        if enemigo2[0] == Posicion_jugador[0] and enemigo2[1] == Posicion_jugador[1]:
-            Vidas -= 1
-            return Vidas
+        
 #Configuración de la velocidad y frames
 reloj = pygame.time.Clock() #Importante en la actualización de imágenes
 print("Configuración cargada") #Medidas a tomar
@@ -185,6 +175,7 @@ print("Configuración cargada") #Medidas a tomar
 Ventana_principal.fill(Colorfondo)
 pygame.display.flip() #Actualiza la pantalla del juego
 pygame.mixer.music.load('Música/Batallando.mp3') #Carga la música almacenada en las carpetas
+pygame.mixer.music.set_volume(0.4)
 pygame.mixer.music.play(-1) #Hace que el juego reproduzca el juego de forma ilimitada
 
 ##Bucle##
@@ -197,8 +188,9 @@ while not Finalizar:
             print("Se cerró el juego") 
         if evento.type == pygame.KEYDOWN: #Si alguna tecla es presionada
             if evento.key == pygame.K_SPACE:  #Si la tecla es espacio, dispara
-                pygame.mixer.music.load('Música/Disparo_sonido.mp3') #Carga el sonido para disparar
-                pygame.mixer.music.play() #Reproduce el sonido almacenado
+                sonido_disparo = pygame.mixer.Sound("disparo.mp3")
+                sonido_disparo.set_volume(0.5)  # Ajusta el volumen
+                sonido_disparo.play()
                 Disparos_activos.append([Posicion_jugador[0] + 20, Posicion_jugador[1]]) #Agrega un disparo con sus coordenadas respecto al jugador
 
     ### Cierre alternativo ###
@@ -237,7 +229,6 @@ while not Finalizar:
         Ventana_principal.blit(Enemigos_posibles[2], enemigo2) 
 
     animar_muertes()
-    choques_muerte(Vidas)
     mostrar_puntuacion()
     mostrar_vidas(Vidas)
     pygame.display.flip()
@@ -254,7 +245,7 @@ if Finalizar:
     fuente2 = pygame.font.Font(None, 36)
     texto2 = fuente2.render(f"Game Over", True, (255, 255, 255))
     Ventana_principal.blit(texto2, (300, 240))
-    pygame.display.flip()
-    time.sleep(5)
+    pygame.display.flip()  
+    time.sleep(3)
 pygame.quit() #Si no hay otra acción a realizar - Cerrar el juego
 print("Cerrado") 
